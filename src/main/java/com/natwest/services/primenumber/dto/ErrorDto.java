@@ -8,8 +8,7 @@ import lombok.Getter;
 import lombok.ToString;
 import lombok.experimental.FieldDefaults;
 
-import java.io.Serializable;
-import java.util.List;
+import java.util.Date;
 
 @Generated
 @FieldDefaults(level = AccessLevel.PRIVATE)
@@ -17,10 +16,11 @@ import java.util.List;
 @Getter
 @ToString
 @EqualsAndHashCode
-public class PrimeNumberResponse implements Serializable {
+public class ErrorDto {
 
-    Integer initial;
+    String message;
 
-    List<Integer> primes;
+    Integer status;
 
+    Date timeStamp;
 }

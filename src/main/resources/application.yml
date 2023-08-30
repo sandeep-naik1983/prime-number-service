@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: prime-number-service
+
+logging:
+  level:
+    root: info
+
+management:
+  security:
+    enabled: false
+  server:
+    port: 8081
+  endpoint:
+    health:
+      enabled: true

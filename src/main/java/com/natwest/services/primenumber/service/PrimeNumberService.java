@@ -5,6 +5,7 @@ import com.natwest.services.primenumber.exception.InvalidPrimeNumberException;
 import com.natwest.services.primenumber.validator.PrimeNumberValidator;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.cache.annotation.Cacheable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,6 +18,7 @@ public class PrimeNumberService {
 
     private PrimeNumberValidator primeNumberValidator;
 
+    @Cacheable("myCache")
     public List<Integer> getPrimerNumbers(PrimeNumberRequest primeNumberRequest) throws InvalidPrimeNumberException {
         //Validate input
         Boolean isValidNumber = primeNumberValidator.validate(primeNumberRequest);

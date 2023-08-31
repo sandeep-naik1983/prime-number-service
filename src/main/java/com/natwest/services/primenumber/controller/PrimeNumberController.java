@@ -6,6 +6,7 @@ import com.natwest.services.primenumber.exception.InvalidPrimeNumberException;
 import com.natwest.services.primenumber.service.PrimeNumberService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,9 +20,11 @@ public class PrimeNumberController {
 
     private PrimeNumberService primeNumberService;
 
-    @RequestMapping(value = "/{number}", method = RequestMethod.GET, produces = "application/json")
+    @RequestMapping(value = "/{number}", method = RequestMethod.GET
+            , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
+    )
     public PrimeNumberResponse getPrimeNumbers(@PathVariable(value = "number") Integer primeNumber) throws InvalidPrimeNumberException {
-        log.info("Prime Number input controller: {}",primeNumber);
+        log.info("Prime Number input controller: {}", primeNumber);
 
         //Prepare DTO
         PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()

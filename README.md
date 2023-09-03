@@ -35,3 +35,19 @@ like so:
 mvn spring-boot:run
 ```
 
+## End point to test
+
+Below is localhost endpoint to get prime number using GET method. This endpoint serves JSON and XML data. To get data in
+XML, request header should be set as "accept=application/xml" and for json "accept=application/json"
+
+```shell
+http://localhost:8080/prime-number-service/v1/primes/10
+```
+
+Actuator is available at below URL for cache
+
+```shell
+http://localhost:8081/actuator/caches
+```
+
+

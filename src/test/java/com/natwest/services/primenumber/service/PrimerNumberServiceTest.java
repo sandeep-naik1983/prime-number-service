@@ -1,5 +1,6 @@
 package com.natwest.services.primenumber.service;
 
+import com.natwest.services.primenumber.constant.AlgorithmType;
 import com.natwest.services.primenumber.dto.PrimeNumberRequest;
 import com.natwest.services.primenumber.exception.InvalidPrimeNumberException;
 import com.natwest.services.primenumber.validator.PrimeNumberValidator;
@@ -31,7 +32,7 @@ public class PrimerNumberServiceTest {
     }
 
     @Test
-    public void testPrimeNumber() throws InvalidPrimeNumberException {
+    public void testPrimeNumber_SIMPLE() throws InvalidPrimeNumberException {
         //given
         PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()
                 .number(10)
@@ -49,10 +50,47 @@ public class PrimerNumberServiceTest {
     }
 
     @Test
-    public void testInvalidNumber(){
+    public void testInvalidNumber_SIMPLE() {
         //given
         PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()
                 .number(-5)
+                .build();
+
+        //when
+
+        InvalidPrimeNumberException invalidPrimeNumberException = assertThrows(InvalidPrimeNumberException.class, () ->
+                primeNumberService.getPrimerNumbers(primeNumberRequest)
+        );
+        //then
+        assertEquals("Invalid input number", invalidPrimeNumberException.getMessage());
+
+    }
+
+    @Test
+    public void testPrimeNumber_COMPLEX() throws InvalidPrimeNumberException {
+        //given
+        PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()
+                .number(10)
+                .algorithmType(AlgorithmType.COMPLEX)
+                .build();
+
+        //when
+        List<Integer> result = primeNumberService.getPrimerNumbers(primeNumberRequest);
+        //then
+        assertNotNull(result);
+        assertFalse(result.isEmpty());
+
+        List<Integer> expected = Arrays.asList(2, 3, 5, 7);
+
+        assertTrue(expected.containsAll(result));
+    }
+
+    @Test
+    public void testInvalidNumber_COMPLEX() {
+        //given
+        PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()
+                .number(-5)
+                .algorithmType(AlgorithmType.COMPLEX)
                 .build();
 
         //when

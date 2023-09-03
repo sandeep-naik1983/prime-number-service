@@ -1,5 +1,6 @@
 package com.natwest.services.primenumber.dto;
 
+import com.natwest.services.primenumber.constant.AlgorithmType;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -16,4 +17,5 @@ import lombok.experimental.FieldDefaults;
 @EqualsAndHashCode
 public class PrimeNumberRequest {
     Integer number;
+    AlgorithmType algorithmType;
 }

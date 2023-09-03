@@ -1,5 +1,6 @@
 package com.natwest.services.primenumber.controller;
 
+import com.natwest.services.primenumber.constant.AlgorithmType;
 import com.natwest.services.primenumber.dto.PrimeNumberRequest;
 import com.natwest.services.primenumber.dto.PrimeNumberResponse;
 import com.natwest.services.primenumber.exception.InvalidPrimeNumberException;
@@ -10,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -23,12 +25,15 @@ public class PrimeNumberController {
     @RequestMapping(value = "/{number}", method = RequestMethod.GET
             , produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}
     )
-    public PrimeNumberResponse getPrimeNumbers(@PathVariable(value = "number") Integer primeNumber) throws InvalidPrimeNumberException {
+    public PrimeNumberResponse getPrimeNumbers(@PathVariable(value = "number") Integer primeNumber,
+                                               @RequestParam(value = "algorithm", required = false, defaultValue =
+                                                       "SIMPLE") AlgorithmType algorithmType) throws InvalidPrimeNumberException {
         log.info("Prime Number input controller: {}", primeNumber);
 
         //Prepare DTO
         PrimeNumberRequest primeNumberRequest = PrimeNumberRequest.builder()
                 .number(primeNumber)
+                .algorithmType(algorithmType)
                 .build();
 
         return PrimeNumberResponse.builder()

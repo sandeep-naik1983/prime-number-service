@@ -42,6 +42,8 @@ XML, request header should be set as "accept=application/xml" and for json "acce
 
 ```shell
 http://localhost:8080/prime-number-service/v1/primes/10
+http://localhost:8080/prime-number-service/v1/primes/10?algorithm=SIMPLE
+http://localhost:8080/prime-number-service/v1/primes/10?algorithm=COMPLEX
 ```
 
 Actuator is available at below URL for cache
